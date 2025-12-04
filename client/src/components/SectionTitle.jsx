@@ -2,8 +2,10 @@ import React from "react";
 
 const SectionTitle = ({ title = "Section Title" }) => {
   return (
-    <div className="bg-red-200 uppercase font-bold text-3xl py-5 text-red-600 my-4">
-      <h2 className="">{title}</h2>
+    <div className="mx-auto text-center my-4 px-4 md:w-4/12">
+      <h2 className="border-b-8 rounded-b-4xl text-2xl py-2 border-red-400 text-red-600  font-bold uppercase">
+        {title}
+      </h2>
     </div>
   );
 };

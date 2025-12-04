@@ -13,18 +13,18 @@ const Navbar = () => {
   const navOptions = (
     <>
       <li>
-        <Link>Home</Link>
+        <Link to="/">Home</Link>
       </li>
       <li>
-        <Link>About</Link>
-      </li>
-
-      <li>
-        <Link>Doner List</Link>
+        <Link to="about">About</Link>
       </li>
 
       <li>
-        <Link>Contact</Link>
+        <Link to="donors">Doner List</Link>
+      </li>
+
+      <li>
+        <Link to="contact">Contact</Link>
       </li>
     </>
   );
@@ -99,12 +99,9 @@ const Navbar = () => {
               </ul>
             </div>
           ) : (
-            <Link to={"/signIn"}>
-              <button
-                className="btn btn-circle btn-ghost tooltip tooltip-bottom"
-                data-tip="Sign In"
-              >
-                <IoMdLogIn className="text-2xl" />
+            <Link to={"/signInDonor"}>
+              <button className="btn bg-red-600 text-white">
+                Sing In Donor
               </button>
             </Link>
           )}

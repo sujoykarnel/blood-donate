@@ -14,19 +14,19 @@ const BloodInfographic = () => {
     <div>
       <SectionTitle title="Blood inforgraphic"></SectionTitle>
       <div className="mb-4 font-bold">
-        <p>
+        <p className="text-center">
           Blood is essential for life. Donating regularly not only helps
           maintain a safe and steady blood supply, but also ensures that
           patients facing accidents, surgeries, childbirth complications, or
           chronic illnesses receive lifesaving support when they need it most.
         </p>
       </div>
-      <div className="grid grid-cols-4 gap-4">
-        <div className="border-r-2 border-dashed border-red-600">
+      <div className="grid lg:grid-cols-4 gap-4">
+        <div className="border-r-2 lg:border-dashed lg:border-red-600">
           <div className="grid items-center justify-center">
             <img width={200} src={O_Group} alt="O_Group" />
           </div>
-          <div>
+          <div className="p-4">
             <div className="flex items-start">
               <BiSolidDonateBlood className="text-2xl text-red-600 mr-2" />
               <p className="text-start font-bold">Universal Donor (O–)</p>
@@ -41,11 +41,11 @@ const BloodInfographic = () => {
             </div>
           </div>
         </div>
-        <div className="border-r-2 border-dashed border-red-600">
+        <div className="border-r-2 lg:border-dashed lg:border-red-600">
           <div className="grid items-center justify-center">
             <img width={200} src={A_Group} alt="O_Group" />
           </div>
-          <div>
+          <div className="p-4">
             <div className="flex items-start">
               <BiSolidDonateBlood className="text-2xl text-red-600 mr-2" />
               <p className="text-start">
@@ -62,11 +62,11 @@ const BloodInfographic = () => {
             </div>
           </div>
         </div>
-        <div className="border-r-2 border-dashed border-red-600">
+        <div className="border-r-2 lg:border-dashed lg:border-red-600">
           <div className="grid items-center justify-center">
             <img width={200} src={B_Group} alt="O_Group" />
           </div>
-          <div>
+          <div className="p-4">
             <div className="flex items-start">
               <BiSolidDonateBlood className="text-2xl text-red-600 mr-2" />
               <p className="text-start">
@@ -87,7 +87,7 @@ const BloodInfographic = () => {
           <div className="grid items-center justify-center">
             <img width={200} src={AB_Group} alt="O_Group" />
           </div>
-          <div>
+          <div className="p-4">
             <div className="flex items-start">
               <BiSolidDonateBlood className="text-2xl text-red-600 mr-2" />
               <p className="text-start font-bold">
