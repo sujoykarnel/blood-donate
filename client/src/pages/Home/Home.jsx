@@ -1,6 +1,5 @@
 import React from "react";
 import HomeBanner from "./HoneBanner";
-import bloodInfographic from "../../assets/Images/bloodInfofraphic.jpg";
 import BloodInfographic from "./BloodInfographic";
 
 const Home = () => {
