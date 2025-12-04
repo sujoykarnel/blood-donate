@@ -5,9 +5,10 @@ import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
 
 // Internal Modules
-// import materialRoutes from "./routes/materialRoutes.js";
-// import uomRoutes from "./routes/uomRoutes.js";
-// import originRoutes from "./routes/originRoutes.js";
+import donorRoutes from "./routes/donorRoutes.js";
+import geoDivisionRoutes from "./routes/geoDivisionRoutes.js";
+import geoDistrictRoutes from "./routes/geoDistrictRoutes.js";
+import geoUpazilaRoutes from "./routes/geoUpazilaRoutes.js";
 
 // Load environment variables
 dotenv.config();
@@ -34,9 +35,10 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-// app.use("/api/uoms", uomRoutes);
-// app.use("/api/materials", materialRoutes);
-// app.use("/api/origins", originRoutes);
+app.use("/api/donors", donorRoutes);
+app.use("/api/geoDivisions", geoDivisionRoutes);
+app.use("/api/geoDistricts", geoDistrictRoutes);
+app.use("/api/geoUpazilas", geoUpazilaRoutes);
 
 // Start server
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
