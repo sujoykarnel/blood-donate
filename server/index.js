@@ -9,7 +9,7 @@ import donorRoutes from "./routes/donorRoutes.js";
 import geoDivisionRoutes from "./routes/geoDivisionRoutes.js";
 import geoDistrictRoutes from "./routes/geoDistrictRoutes.js";
 import geoUpazilaRoutes from "./routes/geoUpazilaRoutes.js";
-
+import bloodGroupRoutes from "./routes/bloodGroupRoutes.js";
 // Load environment variables
 dotenv.config();
 
@@ -39,6 +39,7 @@ app.use("/api/donors", donorRoutes);
 app.use("/api/geoDivisions", geoDivisionRoutes);
 app.use("/api/geoDistricts", geoDistrictRoutes);
 app.use("/api/geoUpazilas", geoUpazilaRoutes);
+app.use("/api/bloodGroups", bloodGroupRoutes);
 
 // Start server
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));

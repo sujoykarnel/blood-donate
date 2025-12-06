@@ -22,7 +22,7 @@ const BloodInfographic = () => {
         </p>
       </div>
       <div className="grid lg:grid-cols-4 gap-4">
-        <div className="border-r-2 lg:border-dashed lg:border-red-600">
+        <div className="shadow-xl sadow-red-400 ">
           <div className="grid items-center justify-center">
             <img width={200} src={O_Group} alt="O_Group" />
           </div>
@@ -41,7 +41,7 @@ const BloodInfographic = () => {
             </div>
           </div>
         </div>
-        <div className="border-r-2 lg:border-dashed lg:border-red-600">
+        <div className="shadow-xl sadow-red-400">
           <div className="grid items-center justify-center">
             <img width={200} src={A_Group} alt="O_Group" />
           </div>
@@ -62,7 +62,7 @@ const BloodInfographic = () => {
             </div>
           </div>
         </div>
-        <div className="border-r-2 lg:border-dashed lg:border-red-600">
+        <div className="shadow-xl sadow-red-400">
           <div className="grid items-center justify-center">
             <img width={200} src={B_Group} alt="O_Group" />
           </div>
@@ -83,7 +83,7 @@ const BloodInfographic = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className="shadow-xl sadow-red-400 ">
           <div className="grid items-center justify-center">
             <img width={200} src={AB_Group} alt="O_Group" />
           </div>

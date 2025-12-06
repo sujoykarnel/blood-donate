@@ -2,8 +2,17 @@ import React from "react";
 import LottieSingUp from "../../assets/Lottie/bloodDonor.json";
 import Lottie from "lottie-react";
 import { Link } from "react-router";
+import useGeoDivision from "../../hooks/useGeoDivision";
+import useGeoDistrict from "../../hooks/useGeoDistrict";
+import useGeoUpazila from "../../hooks/useGeoUpazila";
+import useBloodGroup from "../../hooks/useBloodGroup";
 
 const SignUpDonor = () => {
+  const geoDivisions = useGeoDivision();
+  const geoDistricts = useGeoDistrict();
+  const geoUpazilas = useGeoUpazila();
+  const bloodGroups = useBloodGroup();
+
   return (
     <div className=" grid lg:grid-cols-2 justify-center items-center">
       <div>
@@ -39,31 +48,38 @@ const SignUpDonor = () => {
             />
             <span>Phone Number</span>
           </label>
+          <label className="label">Blood Group</label>
+          <select defaultValue="Pick a Blood Group" className="select w-full">
+            <option disabled={true}>Pick a Blood Group</option>
+            {bloodGroups.map((item) => (
+              <option>{item.name}</option>
+            ))}
+          </select>
           <fieldset className="fieldset border-base-300 rounded-box border p-4 w-full">
             <legend className="fieldset-legend">Present Location</legend>
 
             <label className="label">Division</label>
             <select defaultValue="Pick a Division" className="select w-full">
               <option disabled={true}>Pick a Division</option>
-              <option>Crimson</option>
-              <option>Amber</option>
-              <option>Velvet</option>
+              {geoDivisions.map((item) => (
+                <option>{item.name}</option>
+              ))}
             </select>
 
             <label className="label">District</label>
             <select defaultValue="Pick a District" className="select w-full">
               <option disabled={true}>Pick a District</option>
-              <option>Crimson</option>
-              <option>Amber</option>
-              <option>Velvet</option>
+              {geoDistricts.map((item) => (
+                <option>{item.name}</option>
+              ))}
             </select>
 
             <label className="label">Upazila</label>
             <select defaultValue="Pick a Upazila" className="select w-full">
               <option disabled={true}>Pick a Upazila</option>
-              <option>Crimson</option>
-              <option>Amber</option>
-              <option>Velvet</option>
+              {geoUpazilas.map((item) => (
+                <option>{item.name}</option>
+              ))}
             </select>
           </fieldset>
           <label className="floating-label">
