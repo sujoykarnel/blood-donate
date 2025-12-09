@@ -26,6 +26,9 @@ const Navbar = () => {
       <li>
         <Link to="contact">Contact</Link>
       </li>
+      <li>
+        <Link to="termsAndConditions">T&C</Link>
+      </li>
     </>
   );
   return (

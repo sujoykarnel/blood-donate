@@ -25,7 +25,7 @@ const HomeBanner = () => {
         </div>
         <div>
           <Link to="donors">
-            <button className="btn btn-primary text-nowrap">
+            <button className="btn btn-neutral text-nowrap">
               Find A Donor
             </button>
           </Link>

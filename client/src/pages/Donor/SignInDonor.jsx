@@ -42,7 +42,7 @@ const SignInDonor = () => {
           </label>
 
           <div className="grid justify-items-center">
-            <button className="btn bg-red-400 w-full">Sign In</button>
+            <button className="btn btn-neutral w-full">Sign In</button>
           </div>
           <div>
             <p>

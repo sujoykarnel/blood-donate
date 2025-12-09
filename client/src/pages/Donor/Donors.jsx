@@ -1,10 +1,12 @@
 import React from 'react';
+import SectionTitle from '../../components/SectionTitle';
 
 const Donors = () => {
     return (
-      <div>
+        <div>
+            <SectionTitle title='Find Donors'></SectionTitle>
         <fieldset className=" lg:flex justify-between gap-2 fieldset border-base-300 rounded-box border p-4 w-full shadow-xl shadow-red-400">
-          <legend className="fieldset-legend">Present Location</legend>
+          <legend className="fieldset-legend">Find By Blood Group & Location</legend>
           <fieldset className="lg:w-3/12">
             <label className="label">Blood Group</label>
             <select defaultValue="Pick a Blood Group" className="select w-full">

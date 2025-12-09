@@ -5,6 +5,7 @@ import Home from "../pages/Home/Home";
 import SignUpDonor from "../pages/Donor/SignUpDonor";
 import SignInDonor from "../pages/Donor/SignInDonor";
 import Donors from "../pages/Donor/Donors";
+import TermsAndConditions from "../pages/TermsAndConditions/TermsAndConditions";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "donors",
         element: <Donors></Donors>,
+      },
+      {
+        path: "termsAndConditions",
+        element: <TermsAndConditions></TermsAndConditions>,
       },
     ],
   },
