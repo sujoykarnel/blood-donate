@@ -6,6 +6,10 @@ const bloodGroupSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    photoURL: {
+      type: String,
+      required: true,
+    },
     isActive: {
       type: Boolean,
       default: true,

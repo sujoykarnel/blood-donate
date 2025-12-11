@@ -7,6 +7,6 @@ import {
 
 // routes
 router.get("/", getDonors);
-router.post("/admin", createDonor);
+router.post("/signUp", createDonor);
 
 export default router;

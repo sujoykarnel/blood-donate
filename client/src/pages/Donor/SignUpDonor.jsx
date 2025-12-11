@@ -1,12 +1,13 @@
 import React, { useMemo, useState } from "react";
 import LottieSingUp from "../../assets/Lottie/bloodDonor.json";
 import Lottie from "lottie-react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useGeoDivision from "../../hooks/useGeoDivision";
 import useGeoDistrict from "../../hooks/useGeoDistrict";
 import useGeoUpazila from "../../hooks/useGeoUpazila";
 import useBloodGroup from "../../hooks/useBloodGroup";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 const SignUpDonor = () => {
   const geoDivisions = useGeoDivision();
@@ -18,12 +19,15 @@ const SignUpDonor = () => {
     name: "",
     phone: "",
     bloodGroup: "",
-    division: null,
-    district: null,
-    upazila: null,
+    division_id: null,
+    district_id: null,
+    upazila_id: null,
     password: "",
     rePassword: "",
   });
+  const [markCheckbox, setMarkCheckbox] = useState(false);
+  const { donorSignUp, user } = useAuth();
+  const navigate = useNavigate();
 
   // division options
   const divisionOptions = useMemo(() => {
@@ -31,7 +35,7 @@ const SignUpDonor = () => {
       new Map(
         geoDivisions?.map((item) => [
           item._id,
-          { _id: item._id, id: item.id, name: item.name },
+          { _id: item._id, name: item.name },
         ])
       ).values()
     ).sort((a, b) => a.name.localeCompare(b.name));
@@ -40,37 +44,31 @@ const SignUpDonor = () => {
 
   // district options filtered by selected division
   const districtOptions = useMemo(() => {
-    if (!formData.division) return [];
+    if (!formData.division_id) return [];
     const filtered = geoDistricts.filter(
-      (item) => Number(item.division_id) === formData.division
+      (item) => item.division_id === formData.division_id
     );
     const uniqueDistrict = Array.from(
       new Map(
-        filtered.map((item) => [
-          item._id,
-          { _id: item._id, id: item.id, name: item.name },
-        ])
+        filtered.map((item) => [item._id, { _id: item._id, name: item.name }])
       ).values()
     ).sort((a, b) => a.name.localeCompare(b.name));
     return uniqueDistrict;
-  }, [geoDistricts, formData.division]);
+  }, [geoDistricts, formData.division_id]);
 
   // upazila options filtered by selected district
   const upazilaOptions = useMemo(() => {
-    if (!formData.district) return [];
+    if (!formData.district_id) return [];
     const filtered = geoUpazilas.filter(
-      (item) => Number(item.district_id) === formData.district
+      (item) => item.district_id === formData.district_id
     );
     const uniqueUpazila = Array.from(
       new Map(
-        filtered.map((item) => [
-          item._id,
-          { _id: item._id, id: item.id, name: item.name },
-        ])
+        filtered.map((item) => [item._id, { _id: item._id, name: item.name }])
       ).values()
     ).sort((a, b) => a.name.localeCompare(b.name));
     return uniqueUpazila;
-  }, [geoUpazilas, formData.district]);
+  }, [geoUpazilas, formData.district_id]);
 
   // handle input changes
   const handleChange = (e) => {
@@ -83,13 +81,15 @@ const SignUpDonor = () => {
 
   // handle select changes for number values
   const handleSelectChange = (name) => (e) => {
-    const value = e.target.value ? Number(e.target.value) : null;
+    const value = e.target.value ? e.target.value : null;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
       // reset dependent fields
-      ...(name === "division" ? { district: null, upazila: null } : {}),
-      ...(name === "district" ? { upazila: null } : {}),
+      ...(name === "division_id"
+        ? { district_id: null, upazila_id: null }
+        : {}),
+      ...(name === "district_id" ? { upazila_id: null } : {}),
     }));
   };
 
@@ -104,8 +104,13 @@ const SignUpDonor = () => {
       });
       return; // stop form submission
     }
-    console.log("Form Data Submitted:", formData);
-    // এখানে তোমার API call করতে পারো
+  
+
+    donorSignUp(formData).then((res) => {
+      if (res.data) {
+        navigate("/");
+      }
+    });
   };
 
   return (
@@ -155,12 +160,13 @@ const SignUpDonor = () => {
             value={formData.bloodGroup}
             onChange={handleChange}
             className="select w-full"
+            required
           >
             <option value="" disabled>
               Pick a Blood Group
             </option>
             {bloodGroups.map((item) => (
-              <option key={item._id} value={item.name}>
+              <option key={item._id} value={item._id}>
                 {item.name}
               </option>
             ))}
@@ -171,15 +177,16 @@ const SignUpDonor = () => {
 
             <label className="label">Division</label>
             <select
-              value={formData.division || ""}
-              onChange={handleSelectChange("division")}
+              value={formData.division_id || ""}
+              onChange={handleSelectChange("division_id")}
               className="select w-full"
+              required
             >
               <option value="" disabled>
                 Pick a Division
               </option>
               {divisionOptions.map((item) => (
-                <option key={item._id} value={item.id}>
+                <option key={item._id} value={item._id}>
                   {item.name}
                 </option>
               ))}
@@ -187,16 +194,17 @@ const SignUpDonor = () => {
 
             <label className="label">District</label>
             <select
-              value={formData.district || ""}
-              onChange={handleSelectChange("district")}
+              value={formData.district_id || ""}
+              onChange={handleSelectChange("district_id")}
               className="select w-full"
-              disabled={!formData.division}
+              required
+              disabled={!formData.division_id}
             >
               <option value="" disabled>
                 Pick a District
               </option>
               {districtOptions.map((item) => (
-                <option key={item._id} value={item.id}>
+                <option key={item._id} value={item._id}>
                   {item.name}
                 </option>
               ))}
@@ -204,16 +212,17 @@ const SignUpDonor = () => {
 
             <label className="label">Upazila</label>
             <select
-              value={formData.upazila || ""}
-              onChange={handleSelectChange("upazila")}
+              value={formData.upazila_id || ""}
+              onChange={handleSelectChange("upazila_id")}
               className="select w-full"
-              disabled={!formData.district}
+              required
+              disabled={!formData.district_id}
             >
               <option value="" disabled>
                 Pick a Upazila
               </option>
               {upazilaOptions.map((item) => (
-                <option key={item._id} value={item.id}>
+                <option key={item._id} value={item._id}>
                   {item.name}
                 </option>
               ))}
@@ -251,13 +260,22 @@ const SignUpDonor = () => {
           <label className="label">
             <input
               type="checkbox"
-              defaultChecked
               className="checkbox checkbox-warning"
+              onChange={() => setMarkCheckbox(!markCheckbox)}
+              checked={markCheckbox}
             />
-            I accepts the Turms & Condition
+            I accept the{" "}
+            <span className="btn-link">
+              <Link to={"/termsAndConditions"} target="_blank">
+                Terms & Condition
+              </Link>
+            </span>
           </label>
           <div className="grid justify-items-center">
-            <button className="btn btn-neutral text-white w-full">
+            <button
+              className="btn btn-neutral text-white w-full"
+              disabled={!markCheckbox}
+            >
               Sign Up
             </button>
           </div>

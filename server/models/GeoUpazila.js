@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const geoUpazilaSchema = new mongoose.Schema(
   {
-    id: {
-      type: Number,
+    name: {
+      type: String,
       required: true,
     },
-    name: {
+    bn_name: {
       type: String,
       required: true,
     },
@@ -14,8 +14,12 @@ const geoUpazilaSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    bn_name: {
-      type: String,
+    lat: {
+      type: Number,
+      required: true,
+    },
+    long: {
+      type: Number,
       required: true,
     },
     isActive: {
@@ -26,7 +30,7 @@ const geoUpazilaSchema = new mongoose.Schema(
   { collection: "geoUpazilas", timestamps: true }
 );
 
-geoUpazilaSchema.index({ id: 1 }, { unique: true });
+// geoUpazilaSchema.index({ id: 1 }, { unique: true });
 
 const geoUpazila = mongoose.model("geoUpazila", geoUpazilaSchema);
 

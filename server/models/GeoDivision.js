@@ -2,10 +2,6 @@ import mongoose from "mongoose";
 
 const geoDivisionSchema = new mongoose.Schema(
   {
-    id: {
-      type: Number,
-      required: true,
-    },
     name: {
       type: String,
       required: true,
@@ -30,7 +26,7 @@ const geoDivisionSchema = new mongoose.Schema(
   { collection: "geoDivisions", timestamps: true }
 );
 
-geoDivisionSchema.index({ id: 1 }, { unique: true });
+geoDivisionSchema.index({ name: 1 }, { unique: true });
 
 const geoDivision = mongoose.model("geoDivision", geoDivisionSchema);
 

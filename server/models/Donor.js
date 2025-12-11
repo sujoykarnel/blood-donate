@@ -10,27 +10,28 @@ const donorSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    bloodGroup: {
-      type: String,
-      required: true,
-    },
     password: {
       type: String,
       required: true,
     },
-    divisionId: {
+    bloodGroup: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Origin",
+      ref: "BloodGroup",
       required: true,
     },
-    districtId: {
+    division_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Uom",
+      ref: "DeoDivision",
       required: true,
     },
-    upazilaId: {
+    district_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Uom",
+      ref: "GeoDistrict",
+      required: true,
+    },
+    upazila_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "GeoUpazila",
       required: true,
     },
     isActive: {

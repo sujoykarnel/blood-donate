@@ -9,7 +9,7 @@ const TermsAndConditions = () => {
     <div className="relative">
       <button
         onClick={() => setToggle(!toggle)}
-        className="btn
+        className="btn btn-neutral
       block mx-auto mb-4
       lg:absolute lg:right-0 lg:top-0
       lg:mx-0 "

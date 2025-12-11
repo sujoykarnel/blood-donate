@@ -2,12 +2,9 @@ import mongoose from "mongoose";
 
 const geoDistrictSchema = new mongoose.Schema(
   {
-    id: {
-      type: Number,
-      required: true,
-    },
     division_id: {
-      type: Number,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "GeoDivision",
       required: true,
     },
     name: {
@@ -34,7 +31,7 @@ const geoDistrictSchema = new mongoose.Schema(
   { collection: "geoDistricts", timestamps: true }
 );
 
-geoDistrictSchema.index({ id: 1 }, { unique: true });
+geoDistrictSchema.index({ name: 1 }, { unique: true });
 
 const geoDistrict = mongoose.model("geoDistrict", geoDistrictSchema);
 

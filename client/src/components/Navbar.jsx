@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router";
 import logo from "../assets/logo.png";
 import { IoMdLogIn, IoMdMenu } from "react-icons/io";
+import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
-  const user = null;
+  const { user } = useAuth();
+  console.log(user)
 
   const handleLogOut = () => {
     console.log("clicked");
@@ -57,7 +59,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         <div className="flex justify-center items-center gap-4">
-          {user?.email ? (
+          {user?.phone ? (
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}

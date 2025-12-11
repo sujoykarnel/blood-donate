@@ -1,4 +1,8 @@
 import Donor from "../models/Donor.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+
+const saltRounds = 10;
 
 // get donor
 export const getDonors = (req, res) => {
@@ -15,12 +19,33 @@ export const getDonors = (req, res) => {
 };
 
 // post donor
-export const createDonor = (req, res) => {
-  const donor = new Donor(req.body);
+export const createDonor = async (req, res) => {
+  const hashPasswowd = await bcrypt.hash(req.body.password, saltRounds);
+  const newDonor = { ...req.body, password: hashPasswowd };
+  const donor = new Donor(newDonor);
+
   const savedDonor = donor
     .save()
     .then((data) => {
-      res.status(201).json(data);
+      if (data.phone) {
+        const userData = {
+          _id: data._id,
+          name: data.name,
+          phone: data.phone,
+        };
+        const token = jwt.sign(userData, process.env.JWT_SECRET, {
+          expiresIn: "1h",
+        });
+        const { password, ...donorWithoutPassword } = data.toObject();
+        console.log("token", token, donorWithoutPassword);
+        res
+          .cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+          })
+          .send(donorWithoutPassword);
+      }
     })
     .catch((err) => {
       res.status(409).json({ err });

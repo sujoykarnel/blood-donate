@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { api } from "../api/api";
 
 const useGeoDistrict = () => {
   const [geoDistricts, setGeoDistricts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/geoDistricts")
-      .then((res) => res.json())
-      .then((data) => setGeoDistricts(data))
+    api
+      .get("/geoDistricts")
+      .then((res) => {
+        if (res.data) {
+          setGeoDistricts(res.data);
+        }
+      })
+
       .catch((err) => console.log(err));
   }, []);
 

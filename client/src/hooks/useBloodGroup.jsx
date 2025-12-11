@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { api } from "../api/api";
 
 const useBloodGroup = () => {
   const [bloodGroups, setBloodGroups] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/bloodGroups")
-      .then((res) => res.json())
-      .then((data) => setBloodGroups(data))
+    api
+      .get("/bloodGroups")
+      .then((res) => {
+        if (res.data) {
+          setBloodGroups(res.data);
+        }
+      })
       .catch((err) => console.log(err));
   }, []);
 
